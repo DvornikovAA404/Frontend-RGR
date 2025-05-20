@@ -1,0 +1,441 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #007BFF;
+    background-image: url('/static/images/background.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+  }
+  
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .username {
+    font-size: 16px;
+  }
+  
+  .auth-button {
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-button:hover {
+    background-color: #004494;
+  }
+  
+  .page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 20px;
+  }
+  
+  .video-chat-container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .video-section {
+    flex: 3;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+  }
+  
+  .video-section video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: black;
+  }
+  
+  .video-section video::-webkit-media-controls {
+    background-color: #1a1a1a;
+  }
+  .video-section video::-webkit-media-controls-play-button,
+  .video-section video::-webkit-media-controls-panel {
+    background-color: #007BFF;
+  }
+  
+  .chat-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+  }
+  
+  .chat-tabs {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .tab.active {
+    border-bottom-color: #007BFF;
+    color: #007BFF;
+  }
+  
+  .chat-tab-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .login-prompt {
+    padding: 15px;
+    background-color: #007BFF;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .login-prompt .prompt-buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .prompt-btn {
+    padding: 8px 12px;
+    background-color: white;
+    color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .prompt-btn:hover {
+    background-color: #e6e6e6;
+  }
+
+  .message {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+  }
+  
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .username {
+    font-weight: bold;
+    color: #ccc;
+  }
+  
+  .like-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .like-icon {
+    font-size: 18px;
+    color: gray;
+    pointer-events: none;
+  }
+  
+  .like-count {
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  .like-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: gray;
+    transition: color 0.2s ease;
+  }
+  
+  .like-button.liked {
+    color: red;
+  }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 50px;
+  }
+  
+  .modal.hidden {
+    display: none;
+  }
+  
+  .modal-content {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    width: 320px;
+    position: relative;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .modal-tabs {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .modal-tabs .tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background: transparent;
+    color: white;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .modal-tabs .tab.active {
+    border-bottom: 2px solid #007BFF;
+    color: #007BFF;
+  }
+  
+  .modal-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+  
+  .modal-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .modal-form button:hover {
+    background-color: #0056b3;
+  }
+
+  .like-button {
+    font-size: 18px;
+    color: gray;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .like-button.liked {
+    color: red;
+  }
+
+  .chat-input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 10px 15px;
+    margin-top: 10px;
+  }
+  
+  .chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+    padding-right: 10px;
+  }
+  
+  .send-button {
+    background-color: #007bff00;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* Важно! */
+  }
+  
+  .send-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  
+  .name-tag {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #ccc;
+    text-align: right;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .authorized-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .error-message {
+    margin-top: 5px;
+    padding: 8px 12px;
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    display: none;
+  }
+  
+  .authorized-buttons button {
+    padding: 8px 12px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .authorized-buttons button:hover {
+    background-color: #004494;
+  }
+
+  .video-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.video-table th, .video-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.video-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.video-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+
+.video-card {
+    margin: 10px;
+    background: white;
+    padding: 0px;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 5px;
+    width: 320px;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
