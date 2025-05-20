@@ -281,3 +281,25 @@ function handleLoginSuccess(username) {
 
 
 });
+
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('logout-btn')) {
+        fetch('/api/logout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.removeItem('username');
+                document.querySelector('.username').textContent = "Гость";
+                document.querySelector('.auth-button').classList.remove('hidden');
+                document.querySelector('.authorized-buttons').classList.add('hidden');
+
+                const chatFormContainer = document.querySelector('.chat-form-container');
+                if (chatFormContainer) chatFormContainer.remove();
+            }
+        })
+        .catch(error => console.error('Ошибка выхода:', error));
+    }
+});
